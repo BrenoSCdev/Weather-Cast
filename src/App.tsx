@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect} from 'react';
+import { getWeather } from './services';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+const App = () => {
+const [weather, setWeather] = useState(null)
+const [city, setCity] = useState('')
+
+const fetchData = async () => {
+    try{
+      const data = await getWeather(city)
+      console.log(data)
+    }catch(error){
+      console.log(error)
+    }
+  }
+  useEffect(()=>{
+    fetchData() 
+  },[])
+ return <>
+    <input
+    type='text'
+    onChange={(e) => setCity(e.target.value)}/>
+    <button onClick={fetchData}/>
+ </>
+ 
 }
 
 export default App;
