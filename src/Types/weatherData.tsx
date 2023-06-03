@@ -12,8 +12,14 @@ interface windData {
     deg: number
 }
 
+interface weatherInfo {
+    main: string,
+    description: string
+}
+
 export default interface WeatherData {
     name: string,
     main: mainData
     wind: windData
+    weather: Array<weatherInfo>
 }
